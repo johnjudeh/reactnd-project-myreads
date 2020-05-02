@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PageHeader from './PageHeader';
 
 class BookLibrary extends Component {
     render() {
         return (
             <div className="list-books">
-                <div className="list-books-title">
-                    <h1>MyReads</h1>
-                </div>
+                <PageHeader title='MyReads' />
                 <div className="list-books-content">
                     <div>
                         <div className="bookshelf">
