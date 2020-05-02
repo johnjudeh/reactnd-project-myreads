@@ -10,6 +10,12 @@ class BooksApp extends Component {
         books: []
     }
 
+    constructor(props) {
+        super(props);
+        this.renderBookLibrary = this.renderBookLibrary.bind(this);
+        this.renderBookSearch = this.renderBookSearch.bind(this);
+    }
+
     componentDidMount() {
         BooksAPI.getAll()
             .then(books => this.setState({
@@ -18,11 +24,13 @@ class BooksApp extends Component {
     }
 
     renderBookLibrary() {
-        return <BookLibrary />;
+        const { books } = this.state;
+        return <BookLibrary books={books} />;
     }
 
     renderBookSearch() {
-        return <BookSearch />;
+        const { books } = this.state;
+        return <BookSearch books={books} />;
     }
 
     render() {
