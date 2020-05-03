@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { PROPTYPE_SHAPE_BOOK } from './constants';
+
 import Book from './Book';
 
 function SearchResults(props) {
@@ -15,6 +18,11 @@ function SearchResults(props) {
             </ol>
         </div>
     );
+}
+
+SearchResults.propTypes = {
+    bookResults: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+    updateBookshelf: PropTypes.func.isRequired,
 }
 
 export default SearchResults;

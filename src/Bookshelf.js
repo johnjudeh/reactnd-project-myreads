@@ -1,6 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Book from './Book';
-import { BOOKSHELF_LABELS } from './constants';
+import {
+    BOOKSHELF_LABELS,
+    PERMENANT_BOOKSHELVES,
+    PROPTYPE_SHAPE_BOOK,
+} from './constants';
 
 function Bookshelf(props) {
     const { name, books, updateBookshelf } = props;
@@ -19,6 +24,12 @@ function Bookshelf(props) {
             </div>
         </div>
     );
+}
+
+Bookshelf.propTypes = {
+    name: PropTypes.oneOf(PERMENANT_BOOKSHELVES).isRequired,
+    books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+    updateBookshelf: PropTypes.func.isRequired,
 }
 
 export default Bookshelf;

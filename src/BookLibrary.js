@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { PROPTYPE_SHAPE_BOOK } from './constants';
 import PageHeader from './PageHeader';
 import Bookshelves from './Bookshelves';
 
@@ -17,6 +19,11 @@ function BookLibrary(props) {
             </div>
         </div>
     );
+}
+
+BookLibrary.propTypes = {
+    books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+    updateBookshelf: PropTypes.func.isRequired,
 }
 
 export default BookLibrary;

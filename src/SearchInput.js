@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SearchInput extends Component {
+    static propTypes = {
+        query: PropTypes.string.isRequired,
+        updateQuery: PropTypes.func.isRequired,
+    }
+
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this);

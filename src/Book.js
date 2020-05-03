@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { BOOKSHELF_LABELS } from './constants';
+import PropTypes from 'prop-types';
+import { PROPTYPE_SHAPE_BOOK, BOOKSHELF_LABELS } from './constants';
 
 class Book extends Component {
+    static propTypes = {
+        book: PropTypes.shape(PROPTYPE_SHAPE_BOOK).isRequired,
+        updateBookshelf: PropTypes.func.isRequired,
+    }
+
     constructor(props) {
         super(props);
         this.bookshelfOptions = Object.keys(BOOKSHELF_LABELS);

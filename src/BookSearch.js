@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
-import { BOOKSHELF_VAL_NONE } from './constants';
+import { PROPTYPE_SHAPE_BOOK, BOOKSHELF_VAL_NONE } from './constants';
 
 class BookSearch extends Component {
+    static propTypes = {
+        books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+        updateBookshelf: PropTypes.func.isRequired,
+    }
+
     state = {
         query: '',
         bookResults: []

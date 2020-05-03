@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Bookshelf from './Bookshelf';
-import { PERMENANT_BOOKSHELVES } from './constants';
+import { PROPTYPE_SHAPE_BOOK, PERMENANT_BOOKSHELVES } from './constants';
 
 class Bookshelves extends Component {
+    static propTypes = {
+        books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+        updateBookshelf: PropTypes.func.isRequired,
+    }
+
     getBooksByBookshelf(books) {
         // Organises an array of books and returns a shelf-to-books mapping Object
         const booksByBookshelf = {};
