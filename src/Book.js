@@ -5,6 +5,12 @@ class Book extends Component {
     constructor(props) {
         super(props);
         this.bookshelfValues = Object.keys(BOOKSHELF_LABELS);
+        this.onBookshelfChange = this.onBookshelfChange.bind(this);
+    }
+
+    onBookshelfChange(e) {
+        const { book, updateBookshelf } = this.props;
+        updateBookshelf(book, e.target.value);
     }
 
     render() {
@@ -23,7 +29,10 @@ class Book extends Component {
                     >
                     </div>
                     <div className="book-shelf-changer">
-                        <select>
+                        <select
+                            value={book.shelf}
+                            onChange={this.onBookshelfChange}
+                        >
                             <option value="move" disabled>Move to...</option>
                             {this.bookshelfValues.map(bookshelfValue => (
                                 <option key={bookshelfValue} value={bookshelfValue}>

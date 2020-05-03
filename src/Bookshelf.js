@@ -3,7 +3,7 @@ import Book from './Book';
 import { BOOKSHELF_LABELS } from './constants';
 
 function Bookshelf(props) {
-    const { name, books } = props;
+    const { name, books, updateBookshelf } = props;
 
     return (
         <div className="bookshelf">
@@ -12,7 +12,7 @@ function Bookshelf(props) {
                 <ol className="books-grid">
                     {books.map(book => (
                         <li key={book.id}>
-                            <Book book={book} />
+                            <Book book={book} updateBookshelf={updateBookshelf} />
                         </li>
                     ))}
                 </ol>

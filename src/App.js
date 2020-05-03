@@ -12,8 +12,26 @@ class BooksApp extends Component {
 
     constructor(props) {
         super(props);
+        this.updateBookshelf = this.updateBookshelf.bind(this);
         this.renderBookLibrary = this.renderBookLibrary.bind(this);
         this.renderBookSearch = this.renderBookSearch.bind(this);
+    }
+
+    _updateBooksInState(book, shelf) {
+        // Updates the books in the component's state. Used to avoid
+        // waiting for an API response to update the UI
+        this.setState(currentState => {
+            const unchangedBooks = currentState.books.filter(
+                b => b.id !== book.id
+            );
+            // Creates a copy of the book object before changing it's contents
+            const updatedBook = Object.assign({}, book);
+            updatedBook.shelf = shelf;
+
+            return {
+                books: [...unchangedBooks, updatedBook]
+            }
+        })
     }
 
     componentDidMount() {
@@ -23,9 +41,14 @@ class BooksApp extends Component {
             }));
     }
 
+    updateBookshelf(book, shelf) {
+        this._updateBooksInState(book, shelf);
+        BooksAPI.update(book, shelf);
+    }
+
     renderBookLibrary() {
         const { books } = this.state;
-        return <BookLibrary books={books} />;
+        return <BookLibrary books={books} updateBookshelf={this.updateBookshelf} />;
     }
 
     renderBookSearch() {

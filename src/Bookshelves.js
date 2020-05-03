@@ -11,8 +11,7 @@ class Bookshelves extends Component {
             if (booksByBookshelf.hasOwnProperty(book.shelf)) {
                 booksByBookshelf[book.shelf].push(book);
             } else {
-                booksByBookshelf[book.shelf] = [];
-                booksByBookshelf[book.shelf].push(book);
+                booksByBookshelf[book.shelf] = [book];
             }
         }
 
@@ -20,7 +19,7 @@ class Bookshelves extends Component {
     }
 
     render() {
-        const { books } = this.props;
+        const { books, updateBookshelf } = this.props;
         const booksByBookshelf = this.getBooksByBookshelf(books);
 
         return (
@@ -30,6 +29,7 @@ class Bookshelves extends Component {
                         key={bookshelf}
                         name={bookshelf}
                         books={booksByBookshelf[bookshelf] || []}
+                        updateBookshelf={updateBookshelf}
                     />
                 ))}
             </div>
