@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Bookshelf from './Bookshelf';
+import { PERMENANT_BOOKSHELVES } from './constants';
 
 class Bookshelves extends Component {
     getBooksByBookshelf(books) {
+        // Organises an array of books and returns a shelf-to-books mapping Object
         const booksByBookshelf = {};
 
         for (let book of books) {
@@ -20,15 +22,14 @@ class Bookshelves extends Component {
     render() {
         const { books } = this.props;
         const booksByBookshelf = this.getBooksByBookshelf(books);
-        const bookshelves = Object.keys(booksByBookshelf);
 
         return (
             <div className="list-books-content">
-                {bookshelves.map(bookshelf => (
+                {PERMENANT_BOOKSHELVES.map(bookshelf => (
                     <Bookshelf
                         key={bookshelf}
                         name={bookshelf}
-                        books={booksByBookshelf[bookshelf]}
+                        books={booksByBookshelf[bookshelf] || []}
                     />
                 ))}
             </div>
