@@ -11,11 +11,14 @@ class BookSearch extends Component {
         books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
         updateBookshelf: PropTypes.func.isRequired,
     }
-    static TIMEOUT_MS = 500;
+    static TIMEOUT_MS = 500
+    static DEFAULT_NO_RESULTS_MESSAGE = 'No books were returned for your search criteria'
+    static LOADING_NO_RESULTS_MESSAGE = 'Loading...'
 
     state = {
         query: '',
         bookResults: [],
+        noResultsMessage: '',
     }
 
     constructor(props) {
@@ -37,8 +40,10 @@ class BookSearch extends Component {
                     books,
                 );
 
+                // Sets bookResults and resets noResultsMessage to the default
                 this.setState({
                     bookResults: enrichedBookResults,
+                    noResultsMessage: BookSearch.DEFAULT_NO_RESULTS_MESSAGE,
                 });
             });
     }
@@ -49,6 +54,7 @@ class BookSearch extends Component {
         // for ${BookSearch.TIMEOUT_MS} ms
         this.setState({
             query: query,
+            noResultsMessage: BookSearch.LOADING_NO_RESULTS_MESSAGE,
         });
 
         if (this._timeoutId) {
@@ -85,7 +91,7 @@ class BookSearch extends Component {
     }
 
     render() {
-        const { query, bookResults } = this.state;
+        const { query, bookResults, noResultsMessage } = this.state;
         const { updateBookshelf } = this.props;
 
         return (
@@ -97,7 +103,9 @@ class BookSearch extends Component {
                     <SearchInput query={query} updateQuery={this.updateQuery} />
                 </div>
                 <SearchResults
+                    query={query}
                     bookResults={bookResults}
+                    noResultsMessage={noResultsMessage}
                     updateBookshelf={updateBookshelf}
                 />
             </div>
