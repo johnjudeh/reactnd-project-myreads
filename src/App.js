@@ -25,7 +25,7 @@ class BooksApp extends Component {
                 b => b.id !== book.id
             );
             // Creates a copy of the book object before changing it's contents
-            const updatedBook = Object.assign({}, book);
+            const updatedBook = {...book};
             updatedBook.shelf = shelf;
 
             return {
