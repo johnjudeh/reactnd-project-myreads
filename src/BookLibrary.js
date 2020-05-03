@@ -9,10 +9,10 @@ function BookLibrary(props) {
     const { books, updateBookshelf } = props;
 
     return (
-        <div className="list-books">
+        <div className='list-books'>
             <PageHeader title='MyReads' />
             <Bookshelves books={books} updateBookshelf={updateBookshelf} />
-            <div className="open-search">
+            <div className='open-search'>
                 <Link to='/search'>
                     <button>Add a book</button>
                 </Link>

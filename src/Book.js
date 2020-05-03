@@ -23,10 +23,10 @@ class Book extends Component {
         const { book } = this.props;
 
         return (
-            <div className="book">
-                <div className="book-top">
+            <div className='book'>
+                <div className='book-top'>
                     <div
-                        className="book-cover"
+                        className='book-cover'
                         style={{
                             width: 128,
                             height: 193,
@@ -34,12 +34,12 @@ class Book extends Component {
                         }}
                     >
                     </div>
-                    <div className="book-shelf-changer">
+                    <div className='book-shelf-changer'>
                         <select
                             value={book.shelf}
                             onChange={this.onBookshelfChange}
                         >
-                            <option value="move" disabled>Move to...</option>
+                            <option value='move' disabled>Move to...</option>
                             {this.bookshelfOptions.map(bookshelfOption => (
                                 <option key={bookshelfOption} value={bookshelfOption}>
                                     {BOOKSHELF_LABELS[bookshelfOption]}
@@ -48,8 +48,8 @@ class Book extends Component {
                         </select>
                     </div>
                 </div>
-                <div className="book-title">{book.title}</div>
-                <div className="book-authors">
+                <div className='book-title'>{book.title}</div>
+                <div className='book-authors'>
                     {(book.authors && book.authors[0]) || 'Unknown Author'}
                 </div>
             </div>

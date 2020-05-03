@@ -8,9 +8,9 @@ function SearchResults(props) {
     const { query, bookResults, noResultsMessage, updateBookshelf } = props;
 
     return (
-        <div className="search-books-results">
-            <ol className="books-grid">
-                {bookResults.length === 0 && query !== ''
+        <div className='search-books-results'>
+            <ol className='books-grid'>
+                {bookResults.length === 0 && query
                     ? noResultsMessage
                     : bookResults.map(book => (
                         <li key={book.id}>

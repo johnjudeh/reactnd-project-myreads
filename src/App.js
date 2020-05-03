@@ -70,7 +70,7 @@ class BooksApp extends Component {
 
     render() {
         return (
-            <div className="app">
+            <div className='app'>
                 <Route exact path='/' render={this.renderBookLibrary} />
                 <Route path='/search' render={this.renderBookSearch} />
             </div>

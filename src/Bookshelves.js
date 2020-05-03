@@ -29,7 +29,7 @@ class Bookshelves extends Component {
         const booksByBookshelf = this.getBooksByBookshelf(books);
 
         return (
-            <div className="list-books-content">
+            <div className='list-books-content'>
                 {PERMENANT_BOOKSHELVES.map(bookshelf => (
                     <Bookshelf
                         key={bookshelf}

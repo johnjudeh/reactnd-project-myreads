@@ -11,10 +11,10 @@ function Bookshelf(props) {
     const { name, books, updateBookshelf } = props;
 
     return (
-        <div className="bookshelf">
-            <h2 className="bookshelf-title">{BOOKSHELF_LABELS[name]}</h2>
-            <div className="bookshelf-books">
-                <ol className="books-grid">
+        <div className='bookshelf'>
+            <h2 className='bookshelf-title'>{BOOKSHELF_LABELS[name]}</h2>
+            <div className='bookshelf-books'>
+                <ol className='books-grid'>
                     {books.length !== 0
                         ? books.map(book => (
                             <li key={book.id}>
