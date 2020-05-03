@@ -18,12 +18,21 @@ export const PERMENANT_BOOKSHELVES = [
     BOOKSHELF_VAL_READ,
 ];
 
-export const PROPTYPE_SHAPE_BOOK = {
+const PROPTYPE_SHAPE_BASE_BOOK = {
     id: PropTypes.string.isRequired,
-    shelf: PropTypes.oneOf(PERMENANT_BOOKSHELVES).isRequired,
     imageLinks: PropTypes.shape({
         smallThumbnail: PropTypes.string.isRequired
     }),
     title: PropTypes.string.isRequired,
     authors: PropTypes.arrayOf(PropTypes.string),
+}
+
+export const PROPTYPE_SHAPE_BOOK = {
+    ...PROPTYPE_SHAPE_BASE_BOOK,
+    shelf: PropTypes.oneOf(PERMENANT_BOOKSHELVES).isRequired,
+}
+
+export const PROPTYPE_SHAPE_BOOK_ALL_SHELVES = {
+    ...PROPTYPE_SHAPE_BASE_BOOK,
+    shelf: PropTypes.oneOf(Object.keys(BOOKSHELF_LABELS)).isRequired
 }

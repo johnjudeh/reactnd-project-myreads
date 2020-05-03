@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PROPTYPE_SHAPE_BOOK } from './constants';
+import { PROPTYPE_SHAPE_BOOK_ALL_SHELVES } from './constants';
 
 import Book from './Book';
 
@@ -21,7 +21,9 @@ function SearchResults(props) {
 }
 
 SearchResults.propTypes = {
-    bookResults: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
+    bookResults: PropTypes.arrayOf(
+        PropTypes.shape(PROPTYPE_SHAPE_BOOK_ALL_SHELVES)
+    ).isRequired,
     updateBookshelf: PropTypes.func.isRequired,
 }
 

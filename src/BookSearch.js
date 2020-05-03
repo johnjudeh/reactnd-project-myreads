@@ -11,18 +11,23 @@ class BookSearch extends Component {
         books: PropTypes.arrayOf(PropTypes.shape(PROPTYPE_SHAPE_BOOK)).isRequired,
         updateBookshelf: PropTypes.func.isRequired,
     }
+    static TIMEOUT_MS = 500;
 
     state = {
         query: '',
-        bookResults: []
+        bookResults: [],
     }
 
     constructor(props) {
         super(props);
+        this._timeoutId = null;
+        this._updateQuery = this._updateQuery.bind(this);
         this.updateQuery = this.updateQuery.bind(this);
     }
 
-    updateQuery(query) {
+    _updateQuery(query) {
+        // Queries the BooksAPI and sets the bookResults in the state.
+        // The function is private and only called by updateQuery()
         const { books } = this.props;
 
         this.searchForBooks(query)
@@ -33,10 +38,26 @@ class BookSearch extends Component {
                 );
 
                 this.setState({
-                    query: query,
                     bookResults: enrichedBookResults,
                 });
             });
+    }
+
+    updateQuery(query) {
+        // A wrapper function around _updateQuery. It updates the query and
+        // debounces the API request until the user stops changing the input
+        // for ${BookSearch.TIMEOUT_MS} ms
+        this.setState({
+            query: query,
+        });
+
+        if (this._timeoutId) {
+            clearTimeout(this._timeoutId);
+        }
+
+        this._timeoutId = setTimeout(() => {
+            this._updateQuery(query);
+        }, BookSearch.TIMEOUT_MS);
     }
 
     searchForBooks(query) {

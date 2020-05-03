@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PROPTYPE_SHAPE_BOOK, BOOKSHELF_LABELS } from './constants';
+import { PROPTYPE_SHAPE_BOOK_ALL_SHELVES, BOOKSHELF_LABELS } from './constants';
 
 class Book extends Component {
     static propTypes = {
-        book: PropTypes.shape(PROPTYPE_SHAPE_BOOK).isRequired,
+        book: PropTypes.shape(PROPTYPE_SHAPE_BOOK_ALL_SHELVES).isRequired,
         updateBookshelf: PropTypes.func.isRequired,
     }
 
