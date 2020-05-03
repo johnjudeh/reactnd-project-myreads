@@ -5,51 +5,51 @@ const api = "https://reactnd-books-api.udacity.com";
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token;
 if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8);
+    token = localStorage.token = Math.random().toString(36).substr(-8);
 
 const headers = {
-  'Accept': 'application/json',
-  'Authorization': token
+    'Accept': 'application/json',
+    'Authorization': token
 };
 
 const errorCheck = (resJSON) => {
-  if (!resJSON.books || resJSON.books.error) {
-    throw resJSON;
-  }
-  return resJSON;
+    if (!resJSON.books || resJSON.books.error) {
+        throw resJSON;
+    }
+    return resJSON;
 }
 
 export const get = (bookId) =>
-  fetch(`${api}/books/${bookId}`, { headers })
-    .then(res => res.json())
-    .then(errorCheck)
-    .then(data => data.book);
+    fetch(`${api}/books/${bookId}`, { headers })
+        .then(res => res.json())
+        .then(errorCheck)
+        .then(data => data.book);
 
 export const getAll = () =>
-  fetch(`${api}/books`, { headers })
-    .then(res => res.json())
-    .then(errorCheck)
-    .then(data => data.books);
+    fetch(`${api}/books`, { headers })
+        .then(res => res.json())
+        .then(errorCheck)
+        .then(data => data.books);
 
 export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
-    method: 'PUT',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ shelf })
-  }).then(res => res.json())
-    .then(errorCheck);
+    fetch(`${api}/books/${book.id}`, {
+        method: 'PUT',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ shelf })
+    }).then(res => res.json())
+        .then(errorCheck);
 
 export const search = (query) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
-    headers: {
-      ...headers,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ query })
-  }).then(res => res.json())
-    .then(errorCheck)
-    .then(data => data.books);
+    fetch(`${api}/search`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ query })
+    }).then(res => res.json())
+        .then(errorCheck)
+        .then(data => data.books);
