@@ -53,7 +53,7 @@ class BooksApp extends Component {
 
     renderBookSearch() {
         const { books } = this.state;
-        return <BookSearch books={books} />;
+        return <BookSearch books={books} updateBookshelf={this.updateBookshelf} />;
     }
 
     render() {
