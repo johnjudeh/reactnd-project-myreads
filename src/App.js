@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI';
 import { Route } from 'react-router-dom';
 import BookLibrary from './BookLibrary';
 import BookSearch from './BookSearch';
+import { BOOKSHELF_VAL_NONE } from './constants';
 import './App.css';
 
 class BooksApp extends Component {
@@ -24,12 +25,18 @@ class BooksApp extends Component {
             const unchangedBooks = currentState.books.filter(
                 b => b.id !== book.id
             );
-            // Creates a copy of the book object before changing it's contents
-            const updatedBook = {...book};
-            updatedBook.shelf = shelf;
+            const books = [...unchangedBooks];
+
+            // We only need to keep books that are on a bookshelf
+            if (shelf !== BOOKSHELF_VAL_NONE) {
+                // Creates a copy of the book object before changing it's contents
+                const updatedBook = {...book};
+                updatedBook.shelf = shelf;
+                books.push(updatedBook);
+            }
 
             return {
-                books: [...unchangedBooks, updatedBook]
+                books: books,
             }
         })
     }
@@ -42,8 +49,13 @@ class BooksApp extends Component {
     }
 
     updateBookshelf(book, shelf) {
+        // Updates the bookshelf in the UI before making an API request.
+        // In the event of an error, the change is reversed
         this._updateBooksInState(book, shelf);
-        BooksAPI.update(book, shelf);
+        BooksAPI.update(book, shelf)
+            .catch(err => {
+                this._updateBooksInState(book, book.shelf);
+            });
     }
 
     renderBookLibrary() {
