@@ -31,18 +31,11 @@ class BookSearch extends Component {
     _updateQuery(query) {
         // Queries the BooksAPI and sets the bookResults in the state.
         // The function is private and only called by updateQuery()
-        const { books } = this.props;
-
         this.searchForBooks(query)
             .then(bookResults => {
-                const enrichedBookResults = this.addShelfToBookResults(
-                    bookResults,
-                    books,
-                );
-
                 // Sets bookResults and resets noResultsMessage to the default
                 this.setState({
-                    bookResults: enrichedBookResults,
+                    bookResults: bookResults,
                     noResultsMessage: BookSearch.DEFAULT_NO_RESULTS_MESSAGE,
                 });
             });
@@ -92,7 +85,9 @@ class BookSearch extends Component {
 
     render() {
         const { query, bookResults, noResultsMessage } = this.state;
-        const { updateBookshelf } = this.props;
+        const { updateBookshelf, books } = this.props;
+
+        const enrichedBookResults = this.addShelfToBookResults(bookResults, books);
 
         return (
             <div className="search-books">
@@ -104,7 +99,7 @@ class BookSearch extends Component {
                 </div>
                 <SearchResults
                     query={query}
-                    bookResults={bookResults}
+                    bookResults={enrichedBookResults}
                     noResultsMessage={noResultsMessage}
                     updateBookshelf={updateBookshelf}
                 />
