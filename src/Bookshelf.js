@@ -15,11 +15,14 @@ function Bookshelf(props) {
             <h2 className="bookshelf-title">{BOOKSHELF_LABELS[name]}</h2>
             <div className="bookshelf-books">
                 <ol className="books-grid">
-                    {books.map(book => (
-                        <li key={book.id}>
-                            <Book book={book} updateBookshelf={updateBookshelf} />
-                        </li>
-                    ))}
+                    {books.length !== 0
+                        ? books.map(book => (
+                            <li key={book.id}>
+                                <Book book={book} updateBookshelf={updateBookshelf} />
+                            </li>
+                        ))
+                        : 'No books in this bookshelf yet'
+                    }
                 </ol>
             </div>
         </div>
