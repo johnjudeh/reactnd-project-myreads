@@ -4,7 +4,7 @@ import { BOOKSHELF_LABELS } from './constants';
 class Book extends Component {
     constructor(props) {
         super(props);
-        this.bookshelfValues = Object.keys(BOOKSHELF_LABELS);
+        this.bookshelfOptions = Object.keys(BOOKSHELF_LABELS);
         this.onBookshelfChange = this.onBookshelfChange.bind(this);
     }
 
@@ -34,9 +34,9 @@ class Book extends Component {
                             onChange={this.onBookshelfChange}
                         >
                             <option value="move" disabled>Move to...</option>
-                            {this.bookshelfValues.map(bookshelfValue => (
-                                <option key={bookshelfValue} value={bookshelfValue}>
-                                    {BOOKSHELF_LABELS[bookshelfValue]}
+                            {this.bookshelfOptions.map(bookshelfOption => (
+                                <option key={bookshelfOption} value={bookshelfOption}>
+                                    {BOOKSHELF_LABELS[bookshelfOption]}
                                 </option>
                             ))}
                         </select>
