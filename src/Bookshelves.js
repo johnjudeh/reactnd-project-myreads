@@ -27,7 +27,7 @@ class Bookshelves extends Component {
                 {bookshelves.map(bookshelf => (
                     <Bookshelf
                         key={bookshelf}
-                        title={bookshelf}
+                        name={bookshelf}
                         books={booksByBookshelf[bookshelf]}
                     />
                 ))}
