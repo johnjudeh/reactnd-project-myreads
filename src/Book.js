@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { PROPTYPE_SHAPE_BOOK_ALL_SHELVES, BOOKSHELF_LABELS } from './constants';
+import defaultBookImage from './images/book-cover.jpg';
 
 class Book extends Component {
     static propTypes = {
@@ -30,7 +31,10 @@ class Book extends Component {
                         style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                            backgroundImage: `url(${
+                                (book.imageLinks && book.imageLinks.smallThumbnail)
+                                || defaultBookImage
+                            })`
                         }}
                     >
                     </div>
@@ -50,7 +54,7 @@ class Book extends Component {
                 </div>
                 <div className='book-title'>{book.title}</div>
                 <div className='book-authors'>
-                    {(book.authors && book.authors[0]) || 'Unknown Author'}
+                    {(book.authors && book.authors.join(', ')) || 'Author unknown'}
                 </div>
             </div>
         );
